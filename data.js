@@ -410,4 +410,45 @@ for (let i = 0; i < petsInOurHouse.members.length; i++) {
 youngestAnimal = youngestAnimal.name
 console.log(youngestAnimal)
 
-// The oldest member
+// The oldest member - for of
+
+let oldestAnimal = petsInOurHouse.members[0];
+
+for (let animal of petsInOurHouse.members){
+    if(oldestAnimal.birthday.year > animal.birthday.year)
+    oldestAnimal = animal
+}
+
+oldestAnimal = oldestAnimal.name;
+console.log(oldestAnimal);
+
+// The oldest member - for i
+
+oldestAnimal = petsInOurHouse.members[0];
+for (let i = 0; i < petsInOurHouse.members.length; i++){
+    if (oldestAnimal.birthday.year > petsInOurHouse.members[i].birthday.year){
+        oldestAnimal = petsInOurHouse.members[i]
+    }
+}
+oldestAnimal = oldestAnimal.name
+console.log(oldestAnimal)
+
+// Average coding level - for...of
+
+let averageCodingLevel = 0;
+let sumOfCodingLevelSum = 0;
+for (let animal of petsInOurHouse.members) {
+	sumOfCodingLevelSum += animal.codingLevel;
+}
+averageCodingLevel = sumOfCodingLevelSum / petsInOurHouse.members.length
+console.log(averageCodingLevel);
+
+// Average coding level - for - i
+
+averageCodingLevel = 0;
+sumOfCodingLevelSum = 0;
+for ( i = 0; i < petsInOurHouse.members.length; i++) {
+	sumOfCodingLevelSum += petsInOurHouse.members[i].codingLevel;
+}
+averageCodingLevel = sumOfCodingLevelSum / petsInOurHouse.members.length
+console.log(averageCodingLevel);
