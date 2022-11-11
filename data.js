@@ -43,17 +43,7 @@ let petsInOurHouse = {
                         ],
                     },
                 ],
-                favFun: [
-                    {
-                        funName: "sleeping",
-                    },
-                    {
-                        funName: "eating",
-                    },
-                    {
-                        funName: "meowing",
-                    },
-                ],
+                favActivity: [ "sleeping", "eating", "meowing"],
                 favSongs: [
                     {
                         title: "99 Problems",
@@ -133,14 +123,7 @@ let petsInOurHouse = {
                         ],
                     },
                 ],
-                favFun: [
-                    {
-                        funName: "jumping",
-                    },
-                    {
-                        funName: "eating",
-                    },
-                ],
+                favActivity: ["jumping", "eating"],
                 favSongs: [
                     {
                         title: "Halo",
@@ -220,17 +203,7 @@ let petsInOurHouse = {
                         ],
                     },
                 ],
-                favFun: [
-                    {
-                        funName: "standing",
-                    },
-                    {
-                        funName: "eating",
-                    },
-                    {
-                        funName: "observing",
-                    },
-                ],
+                favActivity: ["standing", "eating", "observing"],
                 favSongs: [
                     {
                         title: "That's What I Like",
@@ -276,7 +249,7 @@ let petsInOurHouse = {
             },
             location: {
                 country: "Poland",
-                city: "Zakopane",
+                city: "Koszalin",
             },
             codingLevel: 10,
 
@@ -310,17 +283,7 @@ let petsInOurHouse = {
                         ],
                     },
                 ],
-                favFun: [
-                    {
-                        funName: "jumping",
-                    },
-                    {
-                        funName: "eating",
-                    },
-                    {
-                        funName: "galloping",
-                    },
-                ],
+                favActivity: ["jumping", "eating", "galloping"],
                 favSongs: [
                     {
                         title: "La Bachata",
@@ -414,9 +377,9 @@ console.log(youngestAnimal)
 
 let oldestAnimal = petsInOurHouse.members[0];
 
-for (let animal of petsInOurHouse.members){
-    if(oldestAnimal.birthday.year > animal.birthday.year)
-    oldestAnimal = animal
+for (let animal of petsInOurHouse.members) {
+    if (oldestAnimal.birthday.year > animal.birthday.year)
+        oldestAnimal = animal
 }
 
 oldestAnimal = oldestAnimal.name;
@@ -425,8 +388,8 @@ console.log(oldestAnimal);
 // The oldest member - for i
 
 oldestAnimal = petsInOurHouse.members[0];
-for (let i = 0; i < petsInOurHouse.members.length; i++){
-    if (oldestAnimal.birthday.year > petsInOurHouse.members[i].birthday.year){
+for (let i = 0; i < petsInOurHouse.members.length; i++) {
+    if (oldestAnimal.birthday.year > petsInOurHouse.members[i].birthday.year) {
         oldestAnimal = petsInOurHouse.members[i]
     }
 }
@@ -438,7 +401,7 @@ console.log(oldestAnimal)
 let averageCodingLevel = 0;
 let sumOfCodingLevelSum = 0;
 for (let animal of petsInOurHouse.members) {
-	sumOfCodingLevelSum += animal.codingLevel;
+    sumOfCodingLevelSum += animal.codingLevel;
 }
 averageCodingLevel = sumOfCodingLevelSum / petsInOurHouse.members.length
 console.log(averageCodingLevel);
@@ -447,8 +410,71 @@ console.log(averageCodingLevel);
 
 averageCodingLevel = 0;
 sumOfCodingLevelSum = 0;
-for ( i = 0; i < petsInOurHouse.members.length; i++) {
-	sumOfCodingLevelSum += petsInOurHouse.members[i].codingLevel;
+for (i = 0; i < petsInOurHouse.members.length; i++) {
+    sumOfCodingLevelSum += petsInOurHouse.members[i].codingLevel;
 }
 averageCodingLevel = sumOfCodingLevelSum / petsInOurHouse.members.length
 console.log(averageCodingLevel);
+
+// From the same location? - for i
+
+let location = {};
+let locationKeys = "";
+for (i = 0; i < petsInOurHouse.members.length; i++) {
+    locationKeys = petsInOurHouse.members[i].location["city"];
+    if (!location[locationKeys]) {
+        location[locationKeys] = petsInOurHouse.members[i].name
+    } else {
+        location[locationKeys] += ", " + petsInOurHouse.members[i].name
+    }
+}
+console.log(location)
+
+// From the same location? - for...of
+
+location = {};
+for (let animal of petsInOurHouse.members) {
+    location[animal.location.city]
+    if (!location[animal.location.city]) {
+        location[animal.location["city"]] = animal.name;
+    } else {
+        location[animal.location["city"]] += ", " + animal.name;
+    }
+}
+console.log(location)
+
+// Common music styles
+
+let commonMusicGenres = {};
+for (let animal of petsInOurHouse.members) {
+    for (let song of animal.favourites.favSongs) {
+        for (genre of song.genres) {
+            if (!commonMusicGenres[genre]) {
+                commonMusicGenres[genre] = 1;
+            } else {
+                commonMusicGenres[genre] += 1;
+            }
+        }
+    }
+}
+console.log(commonMusicGenres)
+
+// Common type of activity
+
+let commonTypeOfActivity = {};
+for (let animal of petsInOurHouse.members) {
+    for (let activity of animal.favourites.favActivity) {
+        if (!commonTypeOfActivity[activity]) {
+            commonTypeOfActivity[activity] = 1;
+        } else {
+            commonTypeOfActivity[activity] += 1;
+        }
+    }
+}
+console.log(commonTypeOfActivity)
+
+// Best Snack rating
+// Common Snack genres
+// Shorter Snack name
+// Birth seasons
+// Nearest birthday
