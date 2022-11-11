@@ -43,7 +43,7 @@ let petsInOurHouse = {
                         ],
                     },
                 ],
-                favActivity: [ "sleeping", "eating", "meowing"],
+                favActivity: ["sleeping", "eating", "meowing"],
                 favSongs: [
                     {
                         title: "99 Problems",
@@ -474,7 +474,49 @@ for (let animal of petsInOurHouse.members) {
 console.log(commonTypeOfActivity)
 
 // Best Snack rating
+
+let bestSnackRating = 0;
+let snackToCompare = petsInOurHouse.members[0].favourites.favSnacks[0]
+for (animal of petsInOurHouse.members) {
+    for (snack of animal.favourites.favSnacks) {
+        if (snackToCompare.rating < snack.rating) {
+            bestSnackRating = snack.rating
+        }
+    }
+}
+console.log(bestSnackRating)
+
 // Common Snack genres
+
+let commonSnackGenres = {};
+for (animal of petsInOurHouse.members) {
+    for (snack of animal.favourites.favSnacks) {
+        for (genre of snack.genres) {
+            if (!commonSnackGenres[genre]) {
+                commonSnackGenres[genre] = 1
+            } else {
+                commonSnackGenres[genre] += 1
+            }
+        }
+    }
+}
+console.log(commonSnackGenres)
+
 // Shorter Snack name
+
+let shorterSnackName = {};
+let firstSnackName = petsInOurHouse.members[0].favourites.favSnacks[0].title;
+for (let animal of petsInOurHouse.members) {
+    for (let snack of animal.favourites.favSnacks) {
+        if (firstSnackName.length > snack.title.length) {
+            firstSnackName = snack.title;
+            shorterSnackName = {};
+            shorterSnackName[firstSnackName] = firstSnackName.length
+        } else if (firstSnackName.length === snack.title.length)
+            shorterSnackName[snack.title] = snack.title.length;
+    }
+}
+console.log(shorterSnackName)
+
 // Birth seasons
 // Nearest birthday
