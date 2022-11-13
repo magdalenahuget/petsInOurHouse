@@ -165,7 +165,7 @@ let petsInOurHouse = {
             name: "Iguana Robert",
             birthday: {
                 year: "2016",
-                month: "November",
+                month: "September",
                 day: "1",
             },
             location: {
@@ -244,7 +244,7 @@ let petsInOurHouse = {
             name: "Horse Rafal",
             birthday: {
                 year: "1995",
-                month: "May",
+                month: "December",
                 day: "22",
             },
             location: {
@@ -502,7 +502,7 @@ for (animal of petsInOurHouse.members) {
 }
 console.log(commonSnackGenres)
 
-// Shorter Snack name
+// Shortest Snack name
 
 let shorterSnackName = {};
 let firstSnackName = petsInOurHouse.members[0].favourites.favSnacks[0].title;
@@ -519,4 +519,72 @@ for (let animal of petsInOurHouse.members) {
 console.log(shorterSnackName)
 
 // Birth seasons
+
+let seasons = {};
+for (let animal of petsInOurHouse.members) {
+    let currentMonth = animal.birthday.month;
+    if (currentMonth === "December" || currentMonth === "January" || currentMonth === "February") {
+        if (seasons["Winter"]) {
+            seasons["Winter"] += ", " + animal.name;
+        } else {
+            seasons["Winter"] = animal.name;
+        }
+    }
+    if (currentMonth === "March" || currentMonth === "April" || currentMonth === "May") {
+        if (seasons["Spring"]) {
+            seasons["Spring"] += ", " + animal.name;
+        } else {
+            seasons["Spring"] = animal.name;
+        }
+    }
+    if (currentMonth === "June" || currentMonth === "July" || currentMonth === "August") {
+        if (seasons["Summer"]) {
+            seasons["Summer"] += ", " + animal.name;
+        } else {
+            seasons["Summer"] = animal.name;
+        }
+    }
+    if (currentMonth === "September" || currentMonth === "October" || currentMonth === "November") {
+        if (seasons["Autumn"]) {
+            seasons["Autumn"] += ", " + animal.name;
+        } else {
+            seasons["Autumn"] = animal.name;
+        }
+    }
+}
+console.log(seasons)
+
 // Nearest birthday
+
+const monthsLong = {
+    March: '03',
+    January: '01',
+    February: '02',
+    April: '04',
+    October: '10',
+    May: '05',
+    June: '06',
+    December: '12',
+    July: '07',
+    August: '08',
+    September: '09',
+    November: '11',
+};
+let date = new Date();
+let currentMonthNumber = date.getMonth();
+let nearestBirthdayAnimal = petsInOurHouse.members[0];
+let animalBirthdayMonthNumber = 0;
+let endMessage = "";
+for (let animal of petsInOurHouse.members) {
+    animalBirthdayMonthNumber = monthsLong[animal.birthday.month];
+    if (currentMonthNumber < animalBirthdayMonthNumber) {
+        nearestBirthdayAnimal = animal;
+        endMessage = "Birthday still in current year 2022 has ";
+    } else {
+        if (monthsLong[nearestBirthdayAnimal.birthday.month] > animalBirthdayMonthNumber) {
+            nearestBirthdayAnimal = animal;
+            endMessage = "Nearest birthday in year 2023 has ";
+        }
+    }
+}
+console.log(endMessage + nearestBirthdayAnimal.name);
